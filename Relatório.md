@@ -18,7 +18,6 @@ São calculados os deslocamentos necessários para acessar a posição [i][j] na
 Os deslocamentos são somados para obter o endereço efetivo na matriz, e o valor imediato -2 é armazenado nessa posição.
 Os loops externo e interno são controlados por instruções de comparação (bge) e desvio condicional (j). Após a conclusão de cada loop, os índices são incrementados, e o processo é repetido até que toda a matriz seja inicializada.
 
-Ao final da função, o contexto do registrador é restaurado e a função retorna.
 Por fim, o contexto dos registradores é restaurado, e a função retorna.
 
 Essa implementação é comum em jogos como o Minesweeper, onde a matriz `board` representa o tabuleiro inicial sem bombas. O valor `-2` é utilizado como marcador para indicar a ausência de bombas nas células do tabuleiro.
@@ -89,7 +88,7 @@ Essa função é responsável por verificar se o jogo foi vencido, ou seja, se t
 
 A função inicia salvando o contexto dos registradores e movendo o argumento da função (`board`) para um registrador específico. Em seguida, ela inicializa contadores e utiliza dois loops aninhados para iterar sobre todas as células do tabuleiro.
 
-Dentro do loop interno, o código calcula o endereço da célula atual no tabuleiro, verifica o valor da célula e incrementa um contador caso a célula não contenha uma bomba. Após percorrer todas as células, a função compara o contador com um valor calculado com base no tamanho do tabuleiro e na quantidade de bombas. Se o contador for igual ou maior, significa que todas as células que não contêm bombas foram reveladas, e o jogo é considerado vencido.
+Dentro do loop interno, o código calcula o endereço da célula atual no tabuleiro, verifica o valor da célula e incrementa um contador caso a célula não contenha uma bomba e já tenha sido revelada. Após percorrer todas as células, a função compara o contador com um valor calculado com base no tamanho do tabuleiro e na quantidade de bombas. Se o contador for igual ou maior, significa que todas as células que não contêm bombas foram reveladas, e o jogo é considerado vencido. Nesse caso, quando o contador chega no valor 54, significa que todas as 54 células sem bombas foram reveladas.
 
 A função retorna 1 em caso de vitória e 0 em caso de derrota. O contexto dos registradores é restaurado antes do retorno. Essencialmente, `checkVictory` desempenha um papel fundamental na verificação do estado de vitória no jogo.
 
