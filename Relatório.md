@@ -104,3 +104,13 @@ Durante a iteração, a função verifica se os índices `i` e `j` estão dentro
 Após essa contagem eficiente das bombas nas células vizinhas, a função restaura o contexto dos registradores e retorna ao endereço de chamada da função.
 
 em resumo, `countAdjacentBombs` proporciona a contagem correta das bombas nas células ao redor de uma posição específica no tabuleiro.
+
+
+### Main
+A função main é a implementação da lógica principal do jogo de campo minado.
+
+O código inicia alocando espaço na pilha para o tabuleiro e inicializa a variável `gameActive` como verdadeira. Em seguida, chama as funções `inicialializeBoard` e `plantBombs` para preparar o tabuleiro.
+Em um loop principal (`while (gameActive)`), o código solicita a entrada do usuário para linha e coluna. Em seguida, verifica se a jogada é válida dentro dos limites do tabuleiro.
+A função `play` é chamada para processar a jogada, e o resultado influencia no estado do jogo (`gameActive`). Dependendo do resultado, mensagens de vitória ou derrota são impressas.
+Ao finalizar o loop principal, o código imprime o tabuleiro final, mostrando ou não as bombas. O programa é encerrado usando a chamada do sistema `li $v0, 10`.
+Em resumo, o código representa a lógica de um jogo de campo minado, interagindo com o usuário, processando jogadas, verificando o estado do jogo e exibindo o tabuleiro final, onde ocorre a interligação das demais funções para que o jogo seja funcional e lógico.
