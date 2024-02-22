@@ -8,7 +8,7 @@ O Minesweeper é um jogo de computador clássico onde o jogador precisa desvenda
 
 ## Explicando cada arquivo de código
 ### InitializeBoard
-Esse trecho de código em Assembly MIPS objetiva inicializar uma matriz bidimensional chamada board. A matriz é percorrida usando dois loops aninhados, um para iterar sobre as linhas e outro para as colunas. Durante esse processo de iteração, cada elemento da matriz recebe o valor -2, indicando a ausência de bomba nessa posição.
+Essa função objetiva inicializar uma matriz bidimensional chamada board. A matriz é percorrida usando dois loops aninhados, um para iterar sobre as linhas e outro para as colunas. Durante esse processo de iteração, cada elemento da matriz recebe o valor -2, indicando a ausência de bomba nessa posição.
 
 A função initializeBoard recebe um ponteiro para a matriz board como argumento, que é armazenado no registrador `$s0`. Os loops externo e interno usam os registradores `$s1` e `$s2` como índices para as linhas e colunas, respectivamente.
 
@@ -25,7 +25,7 @@ Essa implementação é comum em jogos como o Minesweeper, onde a matriz `board`
 
 
 ### PlantBombs
-O código apresenta uma função em Assembly MIPS denominada plantBombs, que tem como objetivo distribuir bombas aleatoriamente em um tabuleiro representado por uma matriz chamada board. A função utiliza um loop externo para plantar um número específico de bombas no tabuleiro.
+A função tem como objetivo distribuir bombas aleatoriamente em um tabuleiro representado por uma matriz chamada board. A função utiliza um loop externo para plantar um número específico de bombas no tabuleiro.
 
 Para realizar a distribuição de bombas, a função configura um gerador de números aleatórios com base no tempo atual. Em seguida, ela entra em um loop externo para plantar cada bomba. Dentro desse loop, um loop interno é utilizado para gerar coordenadas aleatórias (row e column) dentro das dimensões do tabuleiro. A função verifica se a posição escolhida já contém uma bomba; se sim, ela repete o processo até encontrar uma posição sem bomba.
 
@@ -34,7 +34,7 @@ Quando uma posição adequada é encontrada, a função atribui o valor -1 a ess
 Ao final, o contexto dos registradores é restaurado, e a função retorna. Esse trecho de código é essencial para a inicialização do tabuleiro do jogo, garantindo uma distribuição aleatória e diversificada das bombas no campo minado.
 
 ### Play
-Este trecho de código em Assembly MIPS implementa a função `play` para processar a jogada do usuário em um jogo representado por uma matriz chamada `board`. Aqui está uma descrição do código:
+A função `play` é usada para processar a jogada do usuário em um jogo representado por uma matriz chamada `board`.
 
 A função começa salvando o contexto dos registradores e movendo os argumentos (o tabuleiro `board`, a linha e a coluna) para registradores específicos. Em seguida, calcula o endereço da célula na matriz correspondente à linha e coluna fornecidas.
 
@@ -52,7 +52,7 @@ Essa função `play` é crucial para o fluxo do jogo, determinando as consequên
 
 
 ### PrintBoard 
-Este trecho do código em Assembly MIPS implementa a função `printBoard`. Essa função tem como objetivo imprimir o tabuleiro de um jogo na saída padrão.
+Essa função tem como objetivo imprimir o tabuleiro de um jogo na saída padrão.
 
 A função inicia salvando o contexto dos registradores e movendo os argumentos da função (o ponteiro para o tabuleiro `board` e o tamanho do tabuleiro `SIZE`) para registradores específicos.
 
@@ -67,7 +67,7 @@ A função restaura o contexto dos registradores e retorna à função chamadora
 Essencialmente, a função `printBoard` é responsável por representar visualmente o estado atual do tabuleiro do jogo na saída padrão.
 
 ### RevealNeighboringCells
-Este trecho de código em Assembly MIPS implementa a função `revealNeighboringCells`. A função é usada para revelar as células vizinhas de uma posição específica (`row`, `column`) em um tabuleiro de jogo representado pela matriz `board`.
+Essa função é usada para revelar as células vizinhas de uma posição específica (`row`, `column`) em um tabuleiro de jogo representado pela matriz `board`.
 
 A função começa salvando o contexto dos registradores e movendo os argumentos da função (`board`, `row`, e `column`) para registradores específicos.
 
@@ -81,7 +81,7 @@ Ao final dos loops, os índices `i` e `j` são incrementados, e os loops continu
 
 O contexto dos registradores é restaurado, e a função retorna ao endereço de chamada.
 
-Essencialmente, a função `revealNeighboringCells` desempenha a função de revelar as células vizinhas de uma posição específica no tabuleiro do jogo, seguindo as regras do jogo e garantindo a eficiente revelação das células adjacentes.
+Em resumo, a função `revealNeighboringCells` desempenha a função de revelar as células vizinhas de uma posição específica no tabuleiro do jogo, seguindo as regras do jogo e garantindo a eficiente revelação das células adjacentes.
 
 
 ### CheckVictory
@@ -92,3 +92,15 @@ A função inicia salvando o contexto dos registradores e movendo o argumento da
 Dentro do loop interno, o código calcula o endereço da célula atual no tabuleiro, verifica o valor da célula e incrementa um contador caso a célula não contenha uma bomba. Após percorrer todas as células, a função compara o contador com um valor calculado com base no tamanho do tabuleiro e na quantidade de bombas. Se o contador for igual ou maior, significa que todas as células que não contêm bombas foram reveladas, e o jogo é considerado vencido.
 
 A função retorna 1 em caso de vitória e 0 em caso de derrota. O contexto dos registradores é restaurado antes do retorno. Essencialmente, `checkVictory` desempenha um papel fundamental na verificação do estado de vitória no jogo.
+
+
+### CountAdjacentsBombs
+Essa função é responsável por contar o número de bombas nas células vizinhas de uma posição específica (`row`, `column`) em um tabuleiro de jogo representado pela matriz `board`.
+
+A função começa salvando o contexto dos registradores e movendo os argumentos da função para registradores específicos. Em seguida, utiliza dois loops aninhados para iterar sobre as células vizinhas, calculando o endereço da célula atual.
+
+Durante a iteração, a função verifica se os índices `i` e `j` estão dentro dos limites do tabuleiro (`SIZE`). Para cada célula vizinha, verifica o valor da célula no tabuleiro. Se a célula contiver uma bomba (valor -1), incrementa um contador (`$s3`). Ao final, o valor do contador é movido para o registrador de retorno (`$v0`).
+
+Após essa contagem eficiente das bombas nas células vizinhas, a função restaura o contexto dos registradores e retorna ao endereço de chamada da função.
+
+em resumo, `countAdjacentBombs` proporciona a contagem correta das bombas nas células ao redor de uma posição específica no tabuleiro.
